@@ -10,7 +10,7 @@ Create your virtual environment and install requirements:
 ```
 python3 -m venv my_venv
 source my_venv/bin/activate
-pip install -r requirements.txt
+pip install -e git+https://github.com/ScaleSec/parliament_role_runner.git
 ```
 
 Run with:
@@ -19,24 +19,110 @@ python3 run_parliament.py --rolename <rolename> --profile <profile>
 ```
 
 
-## Output
-
-If the role has findings, it will print the findings to the console
-
+## Output Example
+Given a policy on the role:
 ```
 {
+    "Statement": [
+        {
+            "Sid": "ElasticComputeCloudFull",
+            "Action": [
+                "ec2:*"
+            ],
+            "Effect": "Allow",
+            "Resource": [
+                "*"
+            ]
+        },
+        {
+            "Sid": "RDSFull",
+            "Action": [
+                "rds:ModifyDBInstance"
+            ],
+            "Effect": "Allow",
+            "Resource": [
+                "*"
+            ]
+        },
+        {
+            "Sid": "S3Full",
+            "Action": [
+                "s3:GetObject",
+                "s3:ListBucket"
+            ],
+            "Effect": "Allow",
+            "Resource": [
+                "arn:aws:s3:::myprivatebucket"
+            ]
+        }
+    ],
+    "Version": "2012-10-17"
+}
+```
+When this script is run against the role, then it will output findings for Action Wildcard, Resource Star, and Resource Mismatch: 
+```
+[
+  {
+    "issue": "Action_Wildcard",
+    "title": "",
+    "severity": "",
+    "description": "",
+    "detail": "",
+    "location": {
+      "action": "ec2:*",
+      "filepath": null
+    },
+    "policy_name": "arn:aws:iam::954013203577:policy/test-policy"
+  },
+  {
     "issue": "RESOURCE_STAR",
-    "title": "Unnecessary use of Resource *",
-    "severity": "LOW",
+    "title": "",
+    "severity": "",
     "description": "",
     "detail": null,
     "location": {
-        "actions": [
+      "actions": [
         "ec2:*"
-        ],
-        "filepath": "policy.json"
-    }
-}
+      ],
+      "filepath": null
+    },
+    "policy_name": "arn:aws:iam::123456789012:policy/test-policy"
+  },
+  {
+    "issue": "RESOURCE_STAR",
+    "title": "",
+    "severity": "",
+    "description": "",
+    "detail": null,
+    "location": {
+      "actions": [
+        "rds:ModifyDBInstance"
+      ],
+      "filepath": null
+    },
+    "policy_name": "arn:aws:iam::123456789012:policy/test-policy"
+  },
+  {
+    "issue": "RESOURCE_MISMATCH",
+    "title": "",
+    "severity": "",
+    "description": "",
+    "detail": [
+      {
+        "action": "s3:GetObject",
+        "required_format": "arn:*:s3:::*/*"
+      }
+    ],
+    "location": {
+      "actions": [
+        "s3:GetObject",
+        "s3:ListBucket"
+      ],
+      "filepath": null
+    },
+    "policy_name": "arn:aws:iam::123456789012:policy/test-policy"
+  }
+]
 ```
 
 ## Custom Checks
