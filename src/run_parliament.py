@@ -16,7 +16,7 @@ import boto3
 import json
 from parliament import Policy
 from docopt import docopt
-from action_wildcard import check_for_wildcard
+from src.action_wildcard import check_for_wildcard
 
 def get_policies_for_role(rolename, iam):
     all_policies = {}
