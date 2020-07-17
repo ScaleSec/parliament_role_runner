@@ -10,12 +10,12 @@ Create your virtual environment and install requirements:
 ```
 python3 -m venv my_venv
 source my_venv/bin/activate
-pip install -e git+https://github.com/ScaleSec/parliament_role_runner.git
+pip3 install -U git+https://github.com/ScaleSec/parliament_role_runner.git
 ```
 
 Run with:
 ```
-python3 run_parliament.py --rolename <rolename> --profile <profile>
+analyze_role --rolename <rolename> --profile <profile>
 ```
 
 
