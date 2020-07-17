@@ -1,6 +1,6 @@
 """Run Parliament on a role
 Usage:
-    run_parliament.py --rolename <rolename> --profile <profile>
+    analyze_role --rolename <rolename> --profile <profile>
 
 Options:
     -h --help                               Show this screen.
@@ -9,14 +9,14 @@ Options:
     --profile profile                       AWS Profile name.
 
 Examples:
-    run_parliament.py --rolename my-aws-role --profile my-aws-profile
+    analyze_role --rolename my-aws-role --profile my-aws-profile
 """
 
 import boto3
 import json
 from parliament import Policy
 from docopt import docopt
-from action_wildcard import check_for_wildcard
+from src.action_wildcard import check_for_wildcard
 
 def get_policies_for_role(rolename, iam):
     all_policies = {}
@@ -80,8 +80,11 @@ def check_role(**arguments):
 
     print(json.dumps(all_findings, indent=2))
 
-if __name__ == '__main__':
+def main():
     arguments = {
         k.lstrip('-'): v for k, v in docopt(__doc__, version='Parliament Role Runner v0.01').items()
     }
     check_role(**arguments)
+
+if __name__ == '__main__':
+    main()
