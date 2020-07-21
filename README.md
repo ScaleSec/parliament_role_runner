@@ -1,6 +1,6 @@
 # parliament_role_runner
 
-See [blog post](https://scalesec.com/aws-series/analyzing-iam-policies-at-scale-with-parliament/) for more info.
+See the [blog post](https://scalesec.com/aws-series/analyzing-iam-policies-at-scale-with-parliament/) for more info.
 
 This is a script to run [Parliament](https://github.com/duo-labs/parliament/) on an IAM role to lint and analyze all of it's attached policies for misconfigurations. 
 
