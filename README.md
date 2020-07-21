@@ -1,6 +1,6 @@
 # parliament_role_runner
 
-See the [blog post](https://scalesec.com/aws-series/analyzing-iam-policies-at-scale-with-parliament/) for more info.
+See the [blog post](https://blog.scalesec.com/analyzing-iam-policies-at-scale-with-parliament-69ae50d335e) for more info.
 
 By default, Parliament CLI will only analyze a single policy document at a time. This is a wrapper script to run [Parliament](https://github.com/duo-labs/parliament/) on an IAM role to lint and analyze all of it's attached policies for misconfigurations.
 
